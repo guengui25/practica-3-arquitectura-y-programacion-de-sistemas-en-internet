@@ -20,7 +20,7 @@ if (!url) {
     //Deno deploy
     //https://docs.deno.com/deploy/manual
 
-    url = Deno.env.get("URl") //Intento coger la variable de entorno URl (si está ejecutandose en DenoDeploy)
+    url = Deno.env.get("URL") //Intento coger la variable de entorno URl (si está ejecutandose en DenoDeploy)
 
     if (!url) {
         console.error("La variable 'URL' no se ha cargado correctamente desde las variables de entorno de DenoDeploy.");

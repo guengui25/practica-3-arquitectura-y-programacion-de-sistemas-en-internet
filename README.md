@@ -11,7 +11,7 @@ Hay que añadir un archivo .env con la variable de entorno URL que contenga la u
 Ejemplo:
 
 ```env
-URL="mongodb+srv://usuario:contrasena@cluster0.ioi135h.mongodb.net/Practica3-Discos?retryWrites=true&w=majority"
+URL=mongodb+srv://usuario:contrasena@cluster0.ioi135h.mongodb.net/Practica3-Discos?retryWrites=true&w=majority
 ```
 
 ## Endpoints
