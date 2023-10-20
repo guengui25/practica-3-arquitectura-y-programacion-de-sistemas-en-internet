@@ -44,7 +44,7 @@ app.get("/get/discos",async (req: Request,res: Response)=>{
 });
 
 //Obtener un disco mediante id
-app.get("/get/disco/:id",async (req: Request,res: Response)=>{
+app.get("/get/discos/:id",async (req: Request,res: Response)=>{
     try{
         const id = req.params.id;
         const coincidencia_id = await DiscoModel.findById(id).exec();
@@ -58,7 +58,7 @@ app.get("/get/disco/:id",async (req: Request,res: Response)=>{
 });
 
 //Obtener listado de discos según nombre
-app.get("/get/discos/:nombre",async (req: Request,res: Response)=>{
+app.get("/get/discos/nombre/:nombre",async (req: Request,res: Response)=>{
     try{
         const nombre = req.params.nombre;
 
@@ -101,7 +101,7 @@ app.get("/get/discos/listado/pais/:pais",async (req: Request,res: Response)=>{
 
 
 //Métodos POST
-app.post("/post",async (req: Request,res: Response)=>{
+app.post("/post/disco",async (req: Request,res: Response)=>{
 
     const disco:DiscoModelType = req.body; //Especifico que el disco tiene la información en el body del request
 
@@ -129,7 +129,7 @@ app.post("/post",async (req: Request,res: Response)=>{
 });
 
 //Métodos PUT
-app.put("/put",async (req: Request,res: Response)=>{
+app.put("/put/disco",async (req: Request,res: Response)=>{
     try {
         const disco = req.body; //Especifico que el disco tiene la información en el body del request
 
@@ -149,7 +149,7 @@ app.put("/put",async (req: Request,res: Response)=>{
 });
 
 //Métodos DELETE
-app.delete("/delete/:id",async (req: Request,res: Response)=>{
+app.delete("/delete/disco/:id",async (req: Request,res: Response)=>{
 
     try{
         const id = req.params.id; //Especifico que el disco tiene la información en el body del request
