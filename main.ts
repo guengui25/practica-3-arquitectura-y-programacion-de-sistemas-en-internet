@@ -1,7 +1,20 @@
+//=======================================================================================================
+//  EXPRESS
+//=======================================================================================================
 //Así consigo la documentación de tipos de express
 // @deno-types="npm:@types/express"
 
 import express , {Request, Response} from "npm:express@4.18.2"; //Importo express
+
+const app = express(); //Inicializo el servidor de express
+
+//Middleware para analizar el cuerpo de la solicitud JSON
+//Hago que pueda recibir el body y sepa interpretarlo
+app.use(express.json());
+
+//=======================================================================================================
+// .ENV
+//=======================================================================================================
 
 //Usar .env
 //https://docs.deno.com/runtime/manual/basics/env_variables
@@ -14,6 +27,7 @@ import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; //Importo do
 const env = await load(); //Cargo el .env
 let url = env["URL"]; //Cojo la variable URL del .env
 
+//Me aseguro de que la variable URL se ha cargado correctamente.
 if (!url) {
     console.error("La variable 'URL' no se ha cargado correctamente desde el .env .");
 
@@ -26,21 +40,19 @@ if (!url) {
         console.error("La variable 'URL' no se ha cargado correctamente desde las variables de entorno de DenoDeploy.");
         Deno.exit(1);
     }
-}
+    else console.log("La variable 'URL' se ha cargado correctamente desde las variables de entorno de DenoDeploy.");
+
+}else console.log("La variable 'URL' se ha cargado correctamente desde el .env .");
+
+//=======================================================================================================
+//  MONGOOSE
+//=======================================================================================================
 
 //Documentacion de mongoose
 //https://www.npmjs.com/package/mongoose
 //https://mongoosejs.com/docs/
 
 import mongoose from "npm:mongoose@7.6.3"; //Importo mongoose
-
-import {DiscoModel, DiscoModelType} from "./disco.ts"; //Importo desde definiciones disco
-
-const app = express(); //Inicializo el servidor de express
-
-//Middleware para analizar el cuerpo de la solicitud JSON
-//Hago que pueda recibir el body y sepa interpretarlo
-app.use(express.json());
 
 //Intento la conexión a la base de datos AtlasMongoDB usando Mongoose
 try {
@@ -50,12 +62,23 @@ try {
     console.error("Error al conectar a MongoDB:", error);
 }
 
-//Págian principal
+//=======================================================================================================
+
+//Importo las definiciones del tipo disco y el modelo de mongoose de disco
+
+import {DiscoModel, DiscoModelType} from "./disco.ts";
+
+//=======================================================================================================
+//  ENDPOINTS
+//=======================================================================================================
+//Página principal
 app.get("/",(req: Request,res: Response)=>{
     res.send("Bienvenido a la página principal de Spin me like a record by guengui25");
 });
+//=======================================================================================================
+//  Métodos GET
+//=======================================================================================================
 
-//Métodos GET
 //Obtener todos los discos existentes
 app.get("/get/discos",async (req: Request,res: Response)=>{
 
@@ -121,8 +144,9 @@ app.get("/get/discos/listado/pais/:pais",async (req: Request,res: Response)=>{
     }
 });
 
-
-//Métodos POST
+//=======================================================================================================
+//  Métodos POST
+//=======================================================================================================
 app.post("/post/disco",async (req: Request,res: Response)=>{
 
     const disco:DiscoModelType = req.body; //Especifico que el disco tiene la información en el body del request
@@ -150,7 +174,9 @@ app.post("/post/disco",async (req: Request,res: Response)=>{
     res.send("Datos recibidos correctamente"); //Devuelvo un mensaje de que se ha recibido correctamente
 });
 
-//Métodos PUT
+//=======================================================================================================
+//  Métodos PUT
+//=======================================================================================================
 app.put("/put/disco",async (req: Request,res: Response)=>{
     try {
         const disco = req.body; //Especifico que el disco tiene la información en el body del request
@@ -169,8 +195,9 @@ app.put("/put/disco",async (req: Request,res: Response)=>{
         res.status(500).send("Error 500"); //Devuelvo un status 500 (error fatal)
     }
 });
-
-//Métodos DELETE
+//=======================================================================================================
+//  Métodos DELETE
+//=======================================================================================================
 app.delete("/delete/disco/:id",async (req: Request,res: Response)=>{
 
     try{
@@ -187,7 +214,8 @@ app.delete("/delete/disco/:id",async (req: Request,res: Response)=>{
 });
 
 //=======================================================================================================
-//Ejecución
+//  Ejecución
+//=======================================================================================================
 app.listen(3000, () => {
     console.log("El servidor está corriendo en el puerto 3000")
 });
