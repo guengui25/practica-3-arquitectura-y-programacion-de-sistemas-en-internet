@@ -4,9 +4,18 @@
 
 import express , {Request, Response}from "npm:express@4.18.2"; //Importo express
 
+import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
+
+const env = await load();
+const url = env["URL"];
+
 //Deno deploy
 //https://docs.deno.com/deploy/manual
 
+//Usar .env
+//https://docs.deno.com/runtime/manual/basics/env_variables
+
+//Documentacion de mongoose
 //https://www.npmjs.com/package/mongoose
 //https://mongoosejs.com/docs/
 
@@ -22,7 +31,7 @@ app.use(express.json());
 
 //Intento la conexión a la base de datos AtlasMongoDB usando Mongoose
 try {
-    await mongoose.connect("mongodb+srv://guengui25:1234@cluster0.ioi135h.mongodb.net/Practica3-Discos?retryWrites=true&w=majority");
+    await mongoose.connect(url);
     console.log("Conexión exitosa a MongoDB");
 } catch (error) {
     console.error("Error al conectar a MongoDB:", error);
