@@ -1,6 +1,3 @@
-//Deno deploy
-//https://docs.deno.com/deploy/manual
-
 //Así consigo la documentación de tipos de express
 // @deno-types="npm:@types/express"
 
@@ -12,10 +9,19 @@ import express , {Request, Response} from "npm:express@4.18.2"; //Importo expres
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; //Importo dotenv
 
 const env = await load(); //Cargo el .env
-const url = env["URL"]; //Cojo la variable URL del .env
+let url = env["URL"]; //Cojo la variable URL del .env
 
 if (!url) {
-    console.error("La variable 'URL' no se ha cargado correctamente.");
+    console.error("La variable 'URL' no se ha cargado correctamente desde el .env .");
+
+    //Deno deploy
+    //https://docs.deno.com/deploy/manual
+    url = Deno.env.get("URl") //Intento coger la variable de entorno URl (si está ejecutandose en DenoDeploy)
+
+    if (!url) {
+        console.error("La variable 'URL' no se ha cargado correctamente desde las variables de entorno de DenoDeploy.");
+        Deno.exit(1);
+    }
 }
 
 //Documentacion de mongoose
@@ -25,6 +31,7 @@ if (!url) {
 import mongoose from "npm:mongoose@7.6.3"; //Importo mongoose
 
 import {DiscoModel, DiscoModelType} from "./disco.ts"; //Importo desde definiciones disco
+import { extension } from "../../../../../../AppData/Local/deno/npm/registry.npmjs.org/@types/mime/1.3.3/index.d.ts";
 
 const app = express(); //Inicializo el servidor de express
 
