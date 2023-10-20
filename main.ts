@@ -154,7 +154,7 @@ app.post("/post/disco",async (req: Request,res: Response)=>{
     console.log(disco); //Muestro por consola la información del disco a añadir
 
         //Verifico que el disco está completo
-        if (!disco.nombre || !disco.autor || !disco.formato || !disco.matriz || !disco.pais_impresion || !disco.arte_portada) {
+        if (!disco.nombre || !disco.autor || !disco.formato || !disco.pais_impresion || !disco.arte_portada) {
             res.status(403).send("Error, faltan datos");
             return;
         }
@@ -181,7 +181,7 @@ app.put("/put/disco",async (req: Request,res: Response)=>{
     try {
         const disco = req.body; //Especifico que el disco tiene la información en el body del request
 
-        if (!disco._id || !disco.nombre || !disco.autor || !disco.formato || !disco.matriz || !disco.pais_impresion || !disco.arte_portada) {
+        if (!disco._id || !disco.nombre || !disco.autor || !disco.formato || !disco.pais_impresion || !disco.arte_portada) {
             res.status(403).send("Error, faltan datos");
             return;
         }

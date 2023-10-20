@@ -36,6 +36,19 @@ URL=mongodb+srv://usuario:contrasena@cluster0.ioi135h.mongodb.net/Practica3-Disc
     - /post/disco
 
 
+Ejemplo formato de los discos:
+```json
+{
+  "nombre": "Nombre del disco",
+  "autor": "Nombre del autor",
+  "formato": "Formato del disco",
+  "matriz": "Nombre de matriz (opcional)",
+  "pais_impresion": "País de impresión",
+  "arte_portada": "URL de la imagen de portada"
+}
+
+```
+
 ### PUT
 
 - Modificar un disco (mandar el disco en formato JSON)
