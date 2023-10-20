@@ -7,7 +7,6 @@ import express , {Request, Response}from "npm:express@4.18.2"; //Importo express
 //Deno deploy
 //https://docs.deno.com/deploy/manual
 
-
 //https://www.npmjs.com/package/mongoose
 //https://mongoosejs.com/docs/
 
@@ -28,6 +27,11 @@ try {
 } catch (error) {
     console.error("Error al conectar a MongoDB:", error);
 }
+
+//Págian principal
+app.get("/",(req: Request,res: Response)=>{
+    res.send("Bienvenido a la página principal de Spin me like a record by guengui25");
+});
 
 //Métodos GET
 //Obtener todos los discos existentes
