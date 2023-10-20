@@ -1,19 +1,22 @@
-//Así consigo la documentación de tipos de express
-
-// @deno-types="npm:@types/express"
-
-import express , {Request, Response}from "npm:express@4.18.2"; //Importo express
-
-import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
-
-const env = await load();
-const url = env["URL"];
-
 //Deno deploy
 //https://docs.deno.com/deploy/manual
 
+//Así consigo la documentación de tipos de express
+// @deno-types="npm:@types/express"
+
+import express , {Request, Response} from "npm:express@4.18.2"; //Importo express
+
 //Usar .env
 //https://docs.deno.com/runtime/manual/basics/env_variables
+
+import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; //Importo dotenv
+
+const env = await load(); //Cargo el .env
+const url = env["URL"]; //Cojo la variable URL del .env
+
+if (!url) {
+    console.error("La variable 'URL' no se ha cargado correctamente.");
+}
 
 //Documentacion de mongoose
 //https://www.npmjs.com/package/mongoose
