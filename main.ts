@@ -6,6 +6,9 @@ import express , {Request, Response} from "npm:express@4.18.2"; //Importo expres
 //Usar .env
 //https://docs.deno.com/runtime/manual/basics/env_variables
 
+//Deno.env
+//https://deno.land/api@v1.37.2?s=Deno.Env
+
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts"; //Importo dotenv
 
 const env = await load(); //Cargo el .env
@@ -16,6 +19,7 @@ if (!url) {
 
     //Deno deploy
     //https://docs.deno.com/deploy/manual
+
     url = Deno.env.get("URl") //Intento coger la variable de entorno URl (si está ejecutandose en DenoDeploy)
 
     if (!url) {
@@ -31,7 +35,6 @@ if (!url) {
 import mongoose from "npm:mongoose@7.6.3"; //Importo mongoose
 
 import {DiscoModel, DiscoModelType} from "./disco.ts"; //Importo desde definiciones disco
-import { extension } from "../../../../../../AppData/Local/deno/npm/registry.npmjs.org/@types/mime/1.3.3/index.d.ts";
 
 const app = express(); //Inicializo el servidor de express
 
